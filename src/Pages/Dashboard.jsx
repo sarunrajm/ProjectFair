@@ -15,7 +15,7 @@ function Dashboard() {
   return (
     <div>
       <Header insideDashboard/>
-      <Row style={{marginTop:"100px"}} className='container-fluid'>
+      <Row style={{margin:"50px"}} className='container-fluid'>
         <Col  sm={12} md={8} >
           <h2>Welcome <span className='text-warning'>{username}</span></h2>
           {/* my projects */}

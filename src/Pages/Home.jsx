@@ -2,15 +2,30 @@ import React, { useEffect, useState } from 'react'
 import { Col, Row } from 'react-bootstrap'
 import ProjectCard from '../Components/ProjectCard'
 import { Link } from 'react-router-dom'
+import { homeProject } from '../Services/allAPI'
 
 function Home() {
   const [loggedin,setLogedin]=useState(false)
+  const [homePrjects,setHomeProjects] = useState([])
+  // api calling
+  const getHomeProjects = async()=>{
+    const result = await homeProject()
+    if(result.status===200){
+      setHomeProjects(result.data)
+    }else{
+      console.log(result);
+      console.log(result.response.data);
+    }
+  }
+
   useEffect(()=>{
     if(sessionStorage.getItem("token")){
     setLogedin(true)
     }else{
       setLogedin(false)
     }
+    // api call
+    getHomeProjects()
   })
   return (
     <>
@@ -33,14 +48,19 @@ function Home() {
           </Col>
         </Row>
       </div>
+
     {/*all projects  */}
+
     <div className='bg-secondary'>
       <h1 className="text-center mb-5">Explore our Projects</h1>
     <marquee scrollAmount={25}>
       <div className='d-flex justify-content-between'>
+       { homePrjects?.length>0?homePrjects.map(projects=>(
         <div style={{width:'500px'}}>
-          <ProjectCard/>
-        </div>
+        <ProjectCard project={projects}/>
+      </div>
+       )):null
+        }
        
       </div>
     </marquee>

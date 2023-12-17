@@ -1,8 +1,18 @@
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Header({insideDashboard}) {
+  const navigate = useNavigate()
+  const handleLogout = ()=>{
+    // remove all existing user detail from browser
+    sessionStorage.removeItem("existingUser")
+    sessionStorage.removeItem("token")
+    setIsAuthorized(false)
+    // navigate to landing page
+    navigate('/')
+  }
+  
   return (
     <Navbar className="bg-black">
         <Container>

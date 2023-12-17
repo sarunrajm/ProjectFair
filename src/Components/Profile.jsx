@@ -1,14 +1,25 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Card } from 'react-bootstrap'
 import Collapse from 'react-bootstrap/Collapse';
 
 
 function Profile() {
     const [open, setOpen] = useState(false);
+    const [userProfile,setUserProfile] = useState({
+      username:"",email:"",password:"",profile:"",github:"",linkedin:""
+    })
+    const [existingImage,setExistingImage] = useState("")
+    const [preview,setPreview] = useState("")
+    useEffect(()=>{
+      if(sessionStorage.getItem("existingUser")){
+        const user = JSON.parse(sessionStorage.getItem("existingUser"))
+        setUserProfile({...userProfile})
+      }
+    })
   return (
     <div>
 
-        <Card style={{width:"20rem"}} className='p-4 mb-4 pt-5 pb-5'>
+        <Card style={{width:"20rem",marginTop:"50px"}} className='p-4 mb-4 pt-5 pb-5'>
 
             <div className='d-flex justify-content-between '>
                 <h3>My Profile</h3>

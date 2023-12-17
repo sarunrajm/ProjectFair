@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Form } from 'react-bootstrap'
 import { loginAPI, registerAPI } from '../Services/allAPI'
@@ -8,6 +8,7 @@ import { ToastContainer, toast } from 'react-toastify';
 
 
 function Auth({register}) {
+  const {isAuthorizes,setIsAuthorized} = useContext(text)
 const [userdata,setUserdata]=useState({
   username:"",
   email:"",
@@ -34,7 +35,6 @@ const handleRegister= async (e)=>{
       username:"",
       email:"",
       password:""
-
     })
     navigate('/login')
   }
@@ -43,7 +43,6 @@ const handleRegister= async (e)=>{
     console.log(result);
   }
  }
-
 }
 const handleLogin=async (e)=>{
   e.preventDefault()
